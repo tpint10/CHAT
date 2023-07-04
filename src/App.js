@@ -13,6 +13,7 @@ class App extends Component {
         color: "red",
         id: "I3Ne5VmJJo6dOHIt",
       },
+      authors: ["Haso", "Huso", "Mujo", "Šemso"],
     };
     this.drone = new window.Scaledrone("I3Ne5VmJJo6dOHIt", {
       data: this.state.member,
@@ -42,9 +43,15 @@ class App extends Component {
   }
 
   onSendMessage = (message) => {
+    const { authors } = this.state;
+    const randomIndex = Math.floor(Math.random() * authors.length);
+    const randomAuthor = authors[randomIndex];
+
+    const messageWithAuthor = `${randomAuthor}: ${message}`;
+
     this.drone.publish({
       room: "observable-tpint10",
-      message,
+      message: messageWithAuthor,
     });
   };
 
